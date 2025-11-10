@@ -141,11 +141,10 @@ model PasswordResetToken {
 model Session {
   id                Int             @id @default(autoincrement())
   userId            Int
-  token             String          @unique
+  token             String          @unique @db.VarChar(500)
   createdAt         DateTime        @default(now())
   expiresAt         DateTime
 
-  @@index([token])
   @@index([userId])
   @@map("sessions")
 }

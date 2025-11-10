@@ -18,7 +18,21 @@ class DownloadService {
   async downloadNewQuotes(): Promise<void> {
     // The backend returns a file download
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-    await api.download('/downloads/new', `quotes_${timestamp}.xlsx`);
+    const fileName = `quotes_${timestamp}.xlsx`;
+
+    // We need to use POST and handle the file download response
+    const response = await api.post('/downloads/new', {}, { responseType: 'blob' });
+
+    // Create a download link
+    const blob = new Blob([response as any]);
+    const downloadUrl = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = downloadUrl;
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(downloadUrl);
   }
 
   async getDownloads(): Promise<ApiResponse<Download[]>> {
