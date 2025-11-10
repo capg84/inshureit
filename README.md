@@ -54,16 +54,62 @@ inshureit/
 - JWT-based authentication
 - Session management with forced logout capabilities
 
-## Getting Started
+## Quick Start
 
 ### Prerequisites
 - Node.js 18+
-- MySQL 8+
-- npm or yarn
+- MySQL 8.0+
+- npm
 
 ### Installation
 
-(Instructions will be added as development progresses)
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/capg84/inshureit.git
+   cd inshureit
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Set up MySQL database**
+   ```sql
+   CREATE DATABASE inshureit;
+   ```
+
+4. **Configure environment**
+   ```bash
+   # Server
+   cd server
+   cp .env.example .env
+   # Edit .env with your database credentials and JWT secret
+
+   # Client
+   cd ../client
+   cp .env.example .env
+   ```
+
+5. **Initialize database**
+   ```bash
+   cd ../server
+   npm run db:push
+   npx prisma db seed
+   ```
+
+6. **Start development servers**
+   ```bash
+   cd ..
+   npm run dev
+   ```
+
+7. **Access the application**
+   - Frontend: http://localhost:5173
+   - Backend: http://localhost:5000
+   - Default admin: admin@inshureit.com / Admin@123
+
+📖 For detailed setup instructions, see [SETUP.md](SETUP.md)
 
 ## License
 
