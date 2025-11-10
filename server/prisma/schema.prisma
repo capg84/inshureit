@@ -1,0 +1,151 @@
+// Prisma schema for InshureIt Application
+// Database: MySQL
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// User types: BACKOFFICE or ADMIN
+enum UserType {
+  BACKOFFICE
+  ADMIN
+}
+
+// User status: ACTIVE or DEACTIVATED
+enum UserStatus {
+  ACTIVE
+  DEACTIVATED
+}
+
+// Life insurance types
+enum InsuranceType {
+  SOLO      // Just me
+  JOINT     // Me and my partner
+}
+
+// Download status
+enum DownloadStatus {
+  NEW
+  DOWNLOADED
+}
+
+// Backoffice and Admin users
+model User {
+  id                Int           @id @default(autoincrement())
+  email             String        @unique
+  firstName         String
+  lastName          String
+  password          String        // Encrypted with bcrypt
+  userType          UserType      @default(BACKOFFICE)
+  status            UserStatus    @default(ACTIVE)
+  mustChangePassword Boolean      @default(true)
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  createdBy         Int?          // ID of admin who created this user
+
+  // Relations
+  downloads         Download[]
+  creator           User?         @relation("UserCreator", fields: [createdBy], references: [id])
+  createdUsers      User[]        @relation("UserCreator")
+
+  @@index([email])
+  @@index([status])
+  @@map("users")
+}
+
+// Customer quote submissions
+model Quote {
+  id                Int             @id @default(autoincrement())
+  insuranceType     InsuranceType
+
+  // Primary person details
+  title             String
+  firstName         String
+  lastName          String
+  dateOfBirth       DateTime
+  email             String
+  mobile            String
+  postcode          String
+  smokingStatus     Boolean
+  coverageAmount    Int             // In pounds
+  coveragePeriod    Int             // In years
+
+  // Partner details (for JOINT insurance only)
+  partnerTitle      String?
+  partnerFirstName  String?
+  partnerLastName   String?
+  partnerDateOfBirth DateTime?
+  partnerSmokingStatus Boolean?
+
+  // Metadata
+  downloadStatus    DownloadStatus  @default(NEW)
+  submittedAt       DateTime        @default(now())
+
+  // Relations
+  downloads         DownloadQuote[]
+
+  @@index([downloadStatus])
+  @@index([submittedAt])
+  @@map("quotes")
+}
+
+// Download records
+model Download {
+  id                Int             @id @default(autoincrement())
+  fileName          String
+  downloadedBy      Int
+  downloadedAt      DateTime        @default(now())
+  quoteCount        Int             // Number of quotes in this download
+
+  // Relations
+  user              User            @relation(fields: [downloadedBy], references: [id])
+  quotes            DownloadQuote[]
+
+  @@index([downloadedBy])
+  @@index([downloadedAt])
+  @@map("downloads")
+}
+
+// Junction table for quotes and downloads (many-to-many)
+model DownloadQuote {
+  quoteId           Int
+  downloadId        Int
+
+  quote             Quote           @relation(fields: [quoteId], references: [id])
+  download          Download        @relation(fields: [downloadId], references: [id])
+
+  @@id([quoteId, downloadId])
+  @@map("download_quotes")
+}
+
+// Password reset tokens (for future enhancement)
+model PasswordResetToken {
+  id                Int             @id @default(autoincrement())
+  token             String          @unique
+  userId            Int
+  expiresAt         DateTime
+  used              Boolean         @default(false)
+  createdAt         DateTime        @default(now())
+
+  @@index([token])
+  @@index([userId])
+  @@map("password_reset_tokens")
+}
+
+// Session management (for tracking active sessions)
+model Session {
+  id                Int             @id @default(autoincrement())
+  userId            Int
+  token             String          @unique
+  createdAt         DateTime        @default(now())
+  expiresAt         DateTime
+
+  @@index([token])
+  @@index([userId])
+  @@map("sessions")
+}

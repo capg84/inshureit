@@ -1,0 +1,28 @@
+{
+  "name": "inshureit",
+  "version": "1.0.0",
+  "description": "Insurance Product Lead Generation Application",
+  "private": true,
+  "workspaces": [
+    "client",
+    "server",
+    "shared"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:server": "npm run dev --workspace=server",
+    "dev:client": "npm run dev --workspace=client",
+    "build": "npm run build --workspaces",
+    "install:all": "npm install && npm install --workspaces"
+  },
+  "keywords": [
+    "insurance",
+    "lead-generation",
+    "life-insurance"
+  ],
+  "author": "Limit Unlimited Technologies Ltd",
+  "license": "PROPRIETARY",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
