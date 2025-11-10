@@ -7,15 +7,7 @@ export default function HomePage() {
       {/* Header */}
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold text-primary">InshureIt</h1>
-            <a
-              href="/backoffice/login"
-              className="text-sm text-gray-600 hover:text-primary transition-colors"
-            >
-              Backoffice Login
-            </a>
-          </div>
+          <h1 className="text-2xl font-bold text-primary">InshureIt</h1>
         </div>
       </header>
 

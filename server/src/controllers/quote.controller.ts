@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import prisma from '../config/database';
 import { InsuranceType } from '@prisma/client';
+import { emailService } from '../utils/email';
 
 /**
  * Submit a new quote
@@ -70,6 +71,24 @@ export async function submitQuote(req: Request, res: Response): Promise<void> {
       },
     });
 
+    // Send confirmation email (non-blocking - don't fail request if email fails)
+    try {
+      await emailService.sendQuoteConfirmation({
+        email: email.toLowerCase(),
+        firstName,
+        lastName,
+        insuranceType,
+        coverageAmount: parseInt(coverageAmount),
+        coveragePeriod: parseInt(coveragePeriod),
+        quoteId: quote.id,
+        partnerFirstName,
+        partnerLastName,
+      });
+    } catch (emailError) {
+      console.error('Failed to send confirmation email:', emailError);
+      // Continue even if email fails - quote was saved successfully
+    }
+
     res.status(201).json({
       success: true,
       data: {
@@ -79,11 +98,30 @@ export async function submitQuote(req: Request, res: Response): Promise<void> {
     });
   } catch (error) {
     console.error('Submit quote error:', error);
+
+    // Provide more specific error messages based on the error type
+    let errorMessage = 'We were unable to submit your quote request. Please check your information and try again.';
+    let errorCode = 'INTERNAL_ERROR';
+
+    if (error instanceof Error) {
+      // Handle specific database errors
+      if (error.message.includes('Unique constraint')) {
+        errorMessage = 'A quote with this email has already been submitted recently. Please contact us if you need assistance.';
+        errorCode = 'DUPLICATE_ENTRY';
+      } else if (error.message.includes('Invalid')) {
+        errorMessage = 'Some of the information provided is invalid. Please verify your details and try again.';
+        errorCode = 'VALIDATION_ERROR';
+      } else if (error.message.includes('connect') || error.message.includes('database')) {
+        errorMessage = 'We are experiencing technical difficulties. Please try again in a few moments.';
+        errorCode = 'DATABASE_ERROR';
+      }
+    }
+
     res.status(500).json({
       success: false,
       error: {
-        message: 'An error occurred while submitting your quote. Please try again.',
-        code: 'INTERNAL_ERROR',
+        message: errorMessage,
+        code: errorCode,
       },
     });
   }
