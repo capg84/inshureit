@@ -50,30 +50,26 @@ export const contactSubmissionsService = {
     if (status) params.status = status;
     if (search) params.search = search;
 
-    const response = await api.get<ContactSubmissionsResponse>('/contact/submissions', { params });
-    return response.data;
+    return await api.get<ContactSubmissionsResponse>('/contact/submissions', { params });
   },
 
   // Get single submission
   getById: async (id: number): Promise<SingleContactResponse> => {
-    const response = await api.get<SingleContactResponse>(`/contact/submissions/${id}`);
-    return response.data;
+    return await api.get<SingleContactResponse>(`/contact/submissions/${id}`);
   },
 
   // Update submission status
   updateStatus: async (id: number, status: string, notes?: string): Promise<SingleContactResponse> => {
-    const response = await api.put<SingleContactResponse>(`/contact/submissions/${id}`, {
+    return await api.put<SingleContactResponse>(`/contact/submissions/${id}`, {
       status,
       notes,
     });
-    return response.data;
   },
 
   // Delete submission
   delete: async (id: number): Promise<{ success: boolean; message: string }> => {
-    const response = await api.delete<{ success: boolean; message: string }>(
+    return await api.delete<{ success: boolean; message: string }>(
       `/contact/submissions/${id}`
     );
-    return response.data;
   },
 };
