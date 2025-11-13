@@ -21,6 +21,7 @@ import ChangePasswordPage from './pages/backoffice/ChangePasswordPage';
 import UsersPage from './pages/admin/UsersPage';
 import CreateUserPage from './pages/admin/CreateUserPage';
 import EditUserPage from './pages/admin/EditUserPage';
+import ContactMessagesPage from './pages/admin/ContactMessagesPage';
 
 function App() {
   return (
@@ -84,6 +85,14 @@ function App() {
         element={
           <ProtectedRoute requireAdmin>
             <EditUserPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/backoffice/contact-messages"
+        element={
+          <ProtectedRoute requireAdmin>
+            <ContactMessagesPage />
           </ProtectedRoute>
         }
       />

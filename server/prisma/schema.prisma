@@ -52,6 +52,7 @@ model User {
   downloads         Download[]
   creator           User?         @relation("UserCreator", fields: [createdBy], references: [id])
   createdUsers      User[]        @relation("UserCreator")
+  resolvedContacts  ContactSubmission[]
 
   @@index([email])
   @@index([status])
@@ -148,3 +149,33 @@ model Session {
   @@index([userId])
   @@map("sessions")
 }
+
+// Contact form submission status
+enum ContactStatus {
+  NEW
+  READ
+  RESOLVED
+}
+
+// Contact form submissions
+model ContactSubmission {
+  id                Int             @id @default(autoincrement())
+  name              String
+  email             String
+  subject           String
+  message           String          @db.Text
+  status            ContactStatus   @default(NEW)
+  submittedAt       DateTime        @default(now())
+  resolvedAt        DateTime?
+  resolvedBy        Int?
+  notes             String?         @db.Text
+
+  // Relations
+  resolver          User?           @relation(fields: [resolvedBy], references: [id])
+
+  @@index([status])
+  @@index([submittedAt])
+  @@index([email])
+  @@map("contact_submissions")
+}
+

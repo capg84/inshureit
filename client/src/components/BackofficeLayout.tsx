@@ -1,5 +1,5 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { LogOut, Home, Download, Users, Key } from 'lucide-react';
+import { LogOut, Home, Download, Users, Key, Mail } from 'lucide-react';
 import { authService } from '../services/auth.service';
 import { useAuthStore } from '../store/authStore';
 
@@ -79,17 +79,31 @@ export function BackofficeLayout({ children }: BackofficeLayoutProps) {
             </Link>
 
             {user?.userType === 'ADMIN' && (
-              <Link
-                to="/backoffice/users"
-                className={`flex items-center gap-2 px-4 py-3 border-b-2 transition-colors ${
-                  isActive('/backoffice/users')
-                    ? 'border-primary text-primary font-medium'
-                    : 'border-transparent text-gray-600 hover:text-gray-900'
-                }`}
-              >
-                <Users className="w-4 h-4" />
-                Manage Users
-              </Link>
+              <>
+                <Link
+                  to="/backoffice/users"
+                  className={`flex items-center gap-2 px-4 py-3 border-b-2 transition-colors ${
+                    isActive('/backoffice/users')
+                      ? 'border-primary text-primary font-medium'
+                      : 'border-transparent text-gray-600 hover:text-gray-900'
+                  }`}
+                >
+                  <Users className="w-4 h-4" />
+                  Manage Users
+                </Link>
+
+                <Link
+                  to="/backoffice/contact-messages"
+                  className={`flex items-center gap-2 px-4 py-3 border-b-2 transition-colors ${
+                    isActive('/backoffice/contact-messages')
+                      ? 'border-primary text-primary font-medium'
+                      : 'border-transparent text-gray-600 hover:text-gray-900'
+                  }`}
+                >
+                  <Mail className="w-4 h-4" />
+                  Contact Messages
+                </Link>
+              </>
             )}
 
             <Link
