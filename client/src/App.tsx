@@ -4,6 +4,12 @@ import { ProtectedRoute } from './components/ProtectedRoute';
 // Customer pages
 import HomePage from './pages/customer/HomePage';
 import QuoteFormPage from './pages/customer/QuoteFormPage';
+import AboutPage from './pages/customer/AboutPage';
+import ContactPage from './pages/customer/ContactPage';
+import PrivacyPolicyPage from './pages/customer/PrivacyPolicyPage';
+import TermsPage from './pages/customer/TermsPage';
+import CookiePolicyPage from './pages/customer/CookiePolicyPage';
+import HelpPage from './pages/customer/HelpPage';
 
 // Backoffice pages
 import LoginPage from './pages/backoffice/LoginPage';
@@ -22,6 +28,12 @@ function App() {
       {/* Customer routes */}
       <Route path="/" element={<HomePage />} />
       <Route path="/quote/:type" element={<QuoteFormPage />} />
+      <Route path="/about" element={<AboutPage />} />
+      <Route path="/contact" element={<ContactPage />} />
+      <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+      <Route path="/terms" element={<TermsPage />} />
+      <Route path="/cookie-policy" element={<CookiePolicyPage />} />
+      <Route path="/help" element={<HelpPage />} />
 
       {/* Backoffice routes */}
       <Route path="/backoffice/login" element={<LoginPage />} />

@@ -47,3 +47,15 @@ exports/
 *.pem
 *.key
 *.crt
+
+# Docker environment file (contains secrets)
+.env.docker
+
+# Backups
+*.sql
+backup_*
+backups/
+
+# Docker volumes
+docker-volumes/
+

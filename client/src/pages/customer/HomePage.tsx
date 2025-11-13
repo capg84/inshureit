@@ -109,6 +109,51 @@ export default function HomePage() {
           </div>
         </div>
 
+        {/* Our Process Section */}
+        <div className="mt-16 max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold text-gray-900 mb-4">Our Process</h3>
+            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+              Finding the right life insurance policy should be straightforward and stress-free.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Step 1 */}
+            <div className="bg-white rounded-lg p-8 shadow-md">
+              <div className="flex items-center justify-center w-12 h-12 bg-primary text-white rounded-full mb-4 text-xl font-bold">
+                1
+              </div>
+              <h4 className="text-xl font-semibold mb-3 text-gray-900">Fill out a simple application form</h4>
+              <p className="text-gray-600">
+                Share a bit about yourself by answering a few basic questions, so we can understand your unique needs.
+              </p>
+            </div>
+
+            {/* Step 2 */}
+            <div className="bg-white rounded-lg p-8 shadow-md">
+              <div className="flex items-center justify-center w-12 h-12 bg-primary text-white rounded-full mb-4 text-xl font-bold">
+                2
+              </div>
+              <h4 className="text-xl font-semibold mb-3 text-gray-900">Explore Your Options</h4>
+              <p className="text-gray-600">
+                A friendly specialist from one of our trusted partners will get in touch to walk you through plans suited to you.
+              </p>
+            </div>
+
+            {/* Step 3 */}
+            <div className="bg-white rounded-lg p-8 shadow-md">
+              <div className="flex items-center justify-center w-12 h-12 bg-primary text-white rounded-full mb-4 text-xl font-bold">
+                3
+              </div>
+              <h4 className="text-xl font-semibold mb-3 text-gray-900">Choose What's Right for You</h4>
+              <p className="text-gray-600">
+                Take your time to review your options and pick the plan that fits you best. Remember, our service is free, confidential, and comes with no obligations.
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* Benefits Section */}
         <div className="mt-16 max-w-5xl mx-auto">
           <h3 className="text-2xl font-semibold text-center mb-8">Why Choose InshureIt?</h3>
@@ -154,9 +199,65 @@ export default function HomePage() {
 
       {/* Footer */}
       <footer className="bg-gray-100 mt-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="text-center text-gray-600 text-sm">
-            <p>&copy; {new Date().getFullYear()} InshureIt - Limit Unlimited Technologies Ltd. All rights reserved.</p>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          {/* Quick Links */}
+          <div className="grid md:grid-cols-4 gap-8 mb-8">
+            <div>
+              <h5 className="font-semibold text-gray-900 mb-4">Products</h5>
+              <ul className="space-y-2">
+                <li><a href="#" className="text-gray-600 hover:text-primary">Life Insurance</a></li>
+                <li><a href="#" className="text-gray-600 hover:text-primary">Joint Life Insurance</a></li>
+                <li><a href="#" className="text-gray-600 hover:text-primary">Term Life Insurance</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h5 className="font-semibold text-gray-900 mb-4">Company</h5>
+              <ul className="space-y-2">
+                <li><Link to="/about" className="text-gray-600 hover:text-primary">About Us</Link></li>
+                <li><Link to="/contact" className="text-gray-600 hover:text-primary">Contact</Link></li>
+                <li><a href="#" className="text-gray-600 hover:text-primary">Careers</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h5 className="font-semibold text-gray-900 mb-4">Support</h5>
+              <ul className="space-y-2">
+                <li><Link to="/help" className="text-gray-600 hover:text-primary">Help Centre</Link></li>
+                <li><Link to="/help" className="text-gray-600 hover:text-primary">FAQs</Link></li>
+                <li><a href="#" className="text-gray-600 hover:text-primary">Claims</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h5 className="font-semibold text-gray-900 mb-4">Legal</h5>
+              <ul className="space-y-2">
+                <li><Link to="/privacy-policy" className="text-gray-600 hover:text-primary">Privacy Policy</Link></li>
+                <li><Link to="/terms" className="text-gray-600 hover:text-primary">Terms & Conditions</Link></li>
+                <li><Link to="/cookie-policy" className="text-gray-600 hover:text-primary">Cookie Policy</Link></li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Disclaimer */}
+          <div className="border-t border-gray-300 pt-8">
+            <div className="bg-gray-50 rounded-lg p-6 mb-6">
+              <h6 className="font-semibold text-gray-900 mb-3 text-sm">Important Information</h6>
+              <p className="text-xs text-gray-600 leading-relaxed mb-3">
+                InshureIt is a trading name of Limit Unlimited Technologies Ltd. We are an introducer appointed representative and provide a free quotation service. We work with a panel of trusted insurance providers and advisors who are authorised and regulated by the Financial Conduct Authority (FCA). Not all of our partners offer an advised service.
+              </p>
+              <p className="text-xs text-gray-600 leading-relaxed mb-3">
+                Whilst use of InshureIt is completely free and without obligation, our partners may receive a commission from your insurer. This does not affect the price you pay for your insurance policy.
+              </p>
+              <p className="text-xs text-gray-600 leading-relaxed">
+                Life insurance policies are long-term commitments and may not be suitable for everyone. Your home may be repossessed if you do not keep up repayments on a mortgage or any other debt secured on it. Please ensure you read all policy documents carefully and seek independent financial advice if you are unsure about any aspect of your insurance needs.
+              </p>
+            </div>
+
+            {/* Copyright */}
+            <div className="text-center text-gray-600 text-sm">
+              <p>&copy; {new Date().getFullYear()} InshureIt - Limit Unlimited Technologies Ltd. All rights reserved.</p>
+            </div>
           </div>
         </div>
       </footer>

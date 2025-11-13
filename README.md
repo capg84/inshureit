@@ -109,7 +109,26 @@ inshureit/
    - Backend: http://localhost:5000
    - Default admin: admin@inshureit.com / Admin@123
 
-📖 For detailed setup instructions, see [SETUP.md](SETUP.md)
+## Documentation
+
+📖 **Development**
+- [SETUP.md](SETUP.md) - Detailed development setup
+- [DEVELOPMENT.md](DEVELOPMENT.md) - Development guide and architecture
+
+🚀 **Deployment**
+- [QUICK-DEPLOY.md](QUICK-DEPLOY.md) - Fast deployment guide (Docker)
+- [DEPLOYMENT.md](DEPLOYMENT.md) - Complete production deployment guide
+
+## Production Deployment
+
+Ready to deploy to production? We support multiple hosting options:
+
+- **Docker** (Recommended): One-command deployment with `./scripts/deploy.sh`
+- **VPS/Cloud**: DigitalOcean, AWS, Google Cloud, Linode
+- **PaaS**: Railway, Heroku, Render
+- **Managed**: AWS ECS, Google Cloud Run
+
+See [QUICK-DEPLOY.md](QUICK-DEPLOY.md) to get started in 5 minutes!
 
 ## License
 
