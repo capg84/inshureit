@@ -42,7 +42,7 @@ services:
       SMTP_SECURE: ${SMTP_SECURE:-false}
       SMTP_USER: ${SMTP_USER}
       SMTP_PASS: ${SMTP_PASS}
-      EMAIL_FROM: ${EMAIL_FROM:-noreply@inshureit.com}
+      EMAIL_FROM: ${EMAIL_FROM:-info@inshureit.com}
       BCRYPT_ROUNDS: ${BCRYPT_ROUNDS:-12}
     depends_on:
       database:

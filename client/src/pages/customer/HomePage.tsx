@@ -225,7 +225,6 @@ export default function HomePage() {
               <ul className="space-y-2">
                 <li><Link to="/help" className="text-gray-600 hover:text-primary">Help Centre</Link></li>
                 <li><Link to="/help" className="text-gray-600 hover:text-primary">FAQs</Link></li>
-                <li><a href="#" className="text-gray-600 hover:text-primary">Claims</a></li>
               </ul>
             </div>
 

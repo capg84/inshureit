@@ -117,7 +117,7 @@ SMTP_PORT=587
 SMTP_SECURE=true
 SMTP_USER=your-email@yourdomain.com
 SMTP_PASS=your-smtp-password
-EMAIL_FROM=noreply@yourdomain.com
+EMAIL_FROM=info@inshureit.com
 
 # Security
 BCRYPT_ROUNDS=12
@@ -673,4 +673,4 @@ ls -la /var/www/inshureit/client/dist
 
 Proprietary - Limit Unlimited Technologies Ltd
 
-For deployment assistance, contact: support@inshureit.com
+For deployment assistance, contact: info@inshureit.com

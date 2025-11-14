@@ -197,7 +197,7 @@ export default function TermsPage() {
                 <p className="text-gray-700 mb-2"><strong>Limit Unlimited Technologies Ltd</strong></p>
                 <p className="text-gray-700 mb-2">Email: <a href="mailto:info@inshureit.com" className="text-primary hover:underline">info@inshureit.com</a></p>
                 <p className="text-gray-700 mb-2">Phone: 020 1234 5678</p>
-                <p className="text-gray-700">Address: 123 Business Street, London, EC1A 1BB, United Kingdom</p>
+                <p className="text-gray-700">Address: 1 Bolton Rise, Tipton, DY4 0WE, United Kingdom</p>
               </div>
             </section>
 

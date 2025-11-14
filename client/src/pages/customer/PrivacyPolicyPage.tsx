@@ -22,7 +22,7 @@ export default function PrivacyPolicyPage() {
             <section className="mb-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">1. Introduction</h2>
               <p className="text-gray-700 mb-4">
-                InshureIt is a trading name of Limit Unlimited Technologies Ltd ("we", "us", or "our"). We are committed to protecting and respecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our website and services.
+                InshureIt is a trading name of Limit Unlimited Technologies Ltd ("we", "us", or "our"). We are registered with the Information Commissioner's Office (ICO) under Data Protection Registration Number: ZB316744. We are committed to protecting and respecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our website and services.
               </p>
               <p className="text-gray-700 mb-4">
                 Please read this Privacy Policy carefully. If you do not agree with the terms of this Privacy Policy, please do not access our website or use our services.
@@ -149,7 +149,7 @@ export default function PrivacyPolicyPage() {
                 <li><strong>Right to Withdraw Consent:</strong> Withdraw consent at any time where we rely on consent</li>
               </ul>
               <p className="text-gray-700 mb-4">
-                To exercise any of these rights, please contact us at: <a href="mailto:privacy@inshureit.com" className="text-primary hover:underline">privacy@inshureit.com</a>
+                To exercise any of these rights, please contact us at: <a href="mailto:info@inshureit.com" className="text-primary hover:underline">info@inshureit.com</a>
               </p>
             </section>
 
@@ -188,9 +188,10 @@ export default function PrivacyPolicyPage() {
               </p>
               <div className="bg-gray-50 p-6 rounded-lg">
                 <p className="text-gray-700 mb-2"><strong>Limit Unlimited Technologies Ltd</strong></p>
-                <p className="text-gray-700 mb-2">Email: <a href="mailto:privacy@inshureit.com" className="text-primary hover:underline">privacy@inshureit.com</a></p>
+                <p className="text-gray-700 mb-2">Data Protection Registration: ZB316744</p>
+                <p className="text-gray-700 mb-2">Email: <a href="mailto:info@inshureit.com" className="text-primary hover:underline">info@inshureit.com</a></p>
                 <p className="text-gray-700 mb-2">Phone: 020 1234 5678</p>
-                <p className="text-gray-700">Address: 123 Business Street, London, EC1A 1BB, United Kingdom</p>
+                <p className="text-gray-700">Address: 1 Bolton Rise, Tipton, DY4 0WE, United Kingdom</p>
               </div>
             </section>
 

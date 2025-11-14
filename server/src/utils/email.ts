@@ -50,7 +50,7 @@ class EmailService {
       const emailText = this.generateQuoteConfirmationText(data);
 
       await this.transporter.sendMail({
-        from: process.env.SMTP_FROM || '"InshureIt" <noreply@inshureit.com>',
+        from: process.env.SMTP_FROM || '"InshureIt" <info@inshureit.com>',
         to: data.email,
         subject: 'Quote Request Received - InshureIt',
         text: emailText,

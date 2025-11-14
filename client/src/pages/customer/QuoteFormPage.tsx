@@ -5,6 +5,7 @@ import { quoteService, QuoteFormData } from '../../services/quote.service';
 const TITLES = ['Mr', 'Mrs', 'Miss', 'Ms', 'Dr', 'Prof'];
 const COVERAGE_AMOUNTS = [30000, 50000, 75000, 100000, 150000, 200000, 250000, 300000, 400000, 500000, 750000, 1000000];
 const COVERAGE_PERIODS = Array.from({ length: 68 }, (_, i) => i + 5); // 5 to 72 years
+const TODAY = new Date().toISOString().split('T')[0]; // Format: YYYY-MM-DD
 
 export default function QuoteFormPage() {
   const { type } = useParams<{ type: string }>();
@@ -44,7 +45,7 @@ export default function QuoteFormPage() {
 
       if (response.success) {
         setSuccess(true);
-        setTimeout(() => navigate('/'), 3000);
+        setTimeout(() => navigate('/'), 30000);
       } else {
         setError(response.error?.message || 'Failed to submit quote');
       }
@@ -177,6 +178,7 @@ export default function QuoteFormPage() {
                     type="date"
                     className="input"
                     required
+                    max={TODAY}
                     value={formData.dateOfBirth}
                     onChange={(e) => setFormData({ ...formData, dateOfBirth: e.target.value })}
                   />
@@ -320,6 +322,7 @@ export default function QuoteFormPage() {
                       type="date"
                       className="input"
                       required
+                      max={TODAY}
                       value={formData.partnerDateOfBirth}
                       onChange={(e) => setFormData({ ...formData, partnerDateOfBirth: e.target.value })}
                     />
