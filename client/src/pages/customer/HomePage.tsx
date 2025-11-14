@@ -216,7 +216,7 @@ export default function HomePage() {
               <ul className="space-y-2">
                 <li><Link to="/about" className="text-gray-600 hover:text-primary">About Us</Link></li>
                 <li><Link to="/contact" className="text-gray-600 hover:text-primary">Contact</Link></li>
-                <li><a href="#" className="text-gray-600 hover:text-primary">Careers</a></li>
+                <li><Link to="/careers" className="text-gray-600 hover:text-primary">Careers</Link></li>
               </ul>
             </div>
 

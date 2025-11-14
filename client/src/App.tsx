@@ -1,11 +1,13 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { ProtectedRoute } from './components/ProtectedRoute';
+import { ScrollToTop } from './components/ScrollToTop';
 
 // Customer pages
 import HomePage from './pages/customer/HomePage';
 import QuoteFormPage from './pages/customer/QuoteFormPage';
 import AboutPage from './pages/customer/AboutPage';
 import ContactPage from './pages/customer/ContactPage';
+import CareersPage from './pages/customer/CareersPage';
 import PrivacyPolicyPage from './pages/customer/PrivacyPolicyPage';
 import TermsPage from './pages/customer/TermsPage';
 import CookiePolicyPage from './pages/customer/CookiePolicyPage';
@@ -25,12 +27,15 @@ import ContactMessagesPage from './pages/admin/ContactMessagesPage';
 
 function App() {
   return (
-    <Routes>
+    <>
+      <ScrollToTop />
+      <Routes>
       {/* Customer routes */}
       <Route path="/" element={<HomePage />} />
       <Route path="/quote/:type" element={<QuoteFormPage />} />
       <Route path="/about" element={<AboutPage />} />
       <Route path="/contact" element={<ContactPage />} />
+      <Route path="/careers" element={<CareersPage />} />
       <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
       <Route path="/terms" element={<TermsPage />} />
       <Route path="/cookie-policy" element={<CookiePolicyPage />} />
@@ -99,7 +104,8 @@ function App() {
 
       {/* Catch all */}
       <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+      </Routes>
+    </>
   );
 }
 
