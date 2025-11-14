@@ -23,7 +23,7 @@
   - 22 (SSH - for management)
 
 #### 2. Domain Configuration
-**Domain Name**: [Your domain - to be configured]
+**Domain Name**: inshureit.com
 
 **DNS Records to Set**:
 ```
@@ -31,6 +31,14 @@ Type    Name              Value                       TTL
 A       @                 [Oracle Cloud IP]           3600
 A       www               [Oracle Cloud IP]           3600
 A       api               [Oracle Cloud IP]           3600
+```
+
+**Example with IP (replace with your actual Oracle Cloud IP)**:
+```
+Type    Name              Value                       TTL
+A       @                 123.456.789.10              3600
+A       www               123.456.789.10              3600
+A       api               123.456.789.10              3600
 ```
 
 #### 3. Environment Variables to Configure
@@ -52,14 +60,14 @@ API_PORT=5001
 
 # Frontend Configuration
 FRONTEND_PORT=80
-VITE_API_URL=https://api.[yourdomain.com]
+VITE_API_URL=https://api.inshureit.com
 
 # JWT Configuration (Generate with: node -e "console.log(require('crypto').randomBytes(64).toString('hex'))")
 JWT_SECRET=[GENERATE-64-CHAR-HEX-STRING]
 JWT_EXPIRATION=7d
 
 # CORS Configuration
-ALLOWED_ORIGINS=https://[yourdomain.com],https://www.[yourdomain.com]
+ALLOWED_ORIGINS=https://inshureit.com,https://www.inshureit.com
 
 # Email Configuration (GoDaddy SMTP - Already Configured)
 SMTP_HOST=smtpout.secureserver.net
@@ -168,7 +176,7 @@ sudo apt install certbot python3-certbot-nginx -y
 docker-compose down
 
 # Get SSL certificate
-sudo certbot certonly --standalone -d [yourdomain.com] -d www.[yourdomain.com] -d api.[yourdomain.com]
+sudo certbot certonly --standalone -d inshureit.com -d www.inshureit.com -d api.inshureit.com
 
 # Update docker-compose.yml to use SSL certificates
 # (Add volume mounts for certificates)
@@ -180,8 +188,8 @@ docker-compose up -d
 ### Step 6: Verify Deployment
 
 1. **Check Application**
-   - Frontend: https://[yourdomain.com]
-   - API: https://api.[yourdomain.com]
+   - Frontend: https://inshureit.com
+   - API: https://api.inshureit.com
 
 2. **Test Login**
    - Email: admin@inshureit.com
@@ -219,7 +227,7 @@ docker-compose up -d
 3. **Configure Monitoring**
    ```bash
    # Set up uptime monitoring (UptimeRobot, Pingdom, etc.)
-   # Monitor: https://[yourdomain.com]
+   # Monitor: https://inshureit.com
    ```
 
 4. **Enable Auto-Updates**
