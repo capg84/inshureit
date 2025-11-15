@@ -326,9 +326,9 @@ export async function searchUsers(req: Request, res: Response): Promise<void> {
 
     const users = await prisma.user.findMany({
       where: {
-        ...(firstName && { firstName: { contains: firstName as string, mode: 'insensitive' } }),
-        ...(lastName && { lastName: { contains: lastName as string, mode: 'insensitive' } }),
-        ...(email && { email: { contains: email as string, mode: 'insensitive' } }),
+        ...(firstName && { firstName: { contains: firstName as string } }),
+        ...(lastName && { lastName: { contains: lastName as string } }),
+        ...(email && { email: { contains: email as string } }),
       },
       select: {
         id: true,
