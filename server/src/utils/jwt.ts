@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+import jwt, { Secret, SignOptions } from 'jsonwebtoken';
 import config from '../config/env';
 import { UserType } from '@prisma/client';
 
@@ -12,9 +12,9 @@ export interface JWTPayload {
  * Generate a JWT token
  */
 export function generateToken(payload: JWTPayload): string {
-  return jwt.sign(payload, config.jwt.secret as string, {
-    expiresIn: config.jwt.expiresIn as string,
-  });
+  return jwt.sign(payload, config.jwt.secret, {
+    expiresIn: config.jwt.expiresIn,
+  } as SignOptions);
 }
 
 /**
@@ -22,7 +22,7 @@ export function generateToken(payload: JWTPayload): string {
  */
 export function verifyToken(token: string): JWTPayload {
   try {
-    return jwt.verify(token, config.jwt.secret as string) as JWTPayload;
+    return jwt.verify(token, config.jwt.secret) as JWTPayload;
   } catch (error) {
     throw new Error('Invalid or expired token');
   }
