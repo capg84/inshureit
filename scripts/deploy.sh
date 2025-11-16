@@ -44,14 +44,14 @@ echo ""
 # Function to run database migrations
 run_migrations() {
     echo "Running database migrations..."
-    docker-compose exec -T backend npx prisma db push
+    docker-compose --env-file .env.docker exec -T backend npx prisma db push
     echo -e "${GREEN}✓ Migrations completed${NC}"
 }
 
 # Function to seed database
 seed_database() {
     echo "Seeding database..."
-    docker-compose exec -T backend npx prisma db seed
+    docker-compose --env-file .env.docker exec -T backend npx prisma db seed
     echo -e "${GREEN}✓ Database seeded${NC}"
 }
 
@@ -74,13 +74,13 @@ case $choice in
 
         # Build images
         echo "Building Docker images..."
-        docker-compose build --no-cache
+        docker-compose --env-file .env.docker build --no-cache
         echo -e "${GREEN}✓ Images built${NC}"
         echo ""
 
         # Start services
         echo "Starting services..."
-        docker-compose up -d
+        docker-compose --env-file .env.docker up -d
         echo -e "${GREEN}✓ Services started${NC}"
         echo ""
 
@@ -102,7 +102,7 @@ case $choice in
         echo -e "${GREEN}✓ Deployment completed successfully!${NC}"
         echo ""
         echo "Services running:"
-        docker-compose ps
+        docker-compose --env-file .env.docker ps
         echo ""
         echo "Access your application at: http://localhost:${FRONTEND_PORT}"
         echo "API available at: http://localhost:${API_PORT}"
@@ -123,12 +123,12 @@ case $choice in
 
         # Rebuild and restart
         echo "Rebuilding images..."
-        docker-compose build
+        docker-compose --env-file .env.docker build
         echo -e "${GREEN}✓ Images rebuilt${NC}"
         echo ""
 
         echo "Restarting services..."
-        docker-compose up -d --force-recreate
+        docker-compose --env-file .env.docker up -d --force-recreate
         echo -e "${GREEN}✓ Services restarted${NC}"
         echo ""
 
@@ -145,14 +145,14 @@ case $choice in
     3)
         echo ""
         echo "Stopping services..."
-        docker-compose down
+        docker-compose --env-file .env.docker down
         echo -e "${GREEN}✓ Services stopped${NC}"
         ;;
 
     4)
         echo ""
         echo "Viewing logs (Ctrl+C to exit)..."
-        docker-compose logs -f
+        docker-compose --env-file .env.docker logs -f
         ;;
 
     5)
@@ -165,7 +165,7 @@ case $choice in
         echo ""
         echo "Creating database backup..."
         BACKUP_FILE="backup_$(date +%Y%m%d_%H%M%S).sql"
-        docker-compose exec -T database mysqldump -u root -p${DB_ROOT_PASSWORD} inshureit > $BACKUP_FILE
+        docker-compose --env-file .env.docker exec -T database mysqldump -u root -p${DB_ROOT_PASSWORD} inshureit > $BACKUP_FILE
         echo -e "${GREEN}✓ Backup created: $BACKUP_FILE${NC}"
         ;;
 
