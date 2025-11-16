@@ -33,7 +33,7 @@ COPY package*.json ./
 # Install only production dependencies
 RUN npm install --only=production
 
-# Copy Prisma schema
+# Copy Prisma schema and seed script
 COPY prisma ./prisma/
 
 # Generate Prisma client in production image
