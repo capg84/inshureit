@@ -12,8 +12,8 @@ export interface JWTPayload {
  * Generate a JWT token
  */
 export function generateToken(payload: JWTPayload): string {
-  return jwt.sign(payload, config.jwt.secret, {
-    expiresIn: config.jwt.expiresIn,
+  return jwt.sign(payload, config.jwt.secret as string, {
+    expiresIn: config.jwt.expiresIn as string,
   });
 }
 
@@ -22,7 +22,7 @@ export function generateToken(payload: JWTPayload): string {
  */
 export function verifyToken(token: string): JWTPayload {
   try {
-    return jwt.verify(token, config.jwt.secret) as JWTPayload;
+    return jwt.verify(token, config.jwt.secret as string) as JWTPayload;
   } catch (error) {
     throw new Error('Invalid or expired token');
   }
