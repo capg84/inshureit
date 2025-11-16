@@ -1,10 +1,9 @@
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { BackofficeLayout } from '../../components/BackofficeLayout';
 import { userService, CreateUserData } from '../../services/user.service';
 
 export default function CreateUserPage() {
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [tempPassword, setTempPassword] = useState('');
