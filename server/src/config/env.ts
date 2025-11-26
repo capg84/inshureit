@@ -42,7 +42,7 @@ const config: Config = {
     requireSpecialChar: process.env.REQUIRE_SPECIAL_CHAR === 'true',
   },
   cors: {
-    allowedOrigins: process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:5173'],
+    allowedOrigins: process.env.ALLOWED_ORIGINS?.split(',').map(origin => origin.trim()) || ['http://localhost:5173'],
   },
   files: {
     exportDirectory: process.env.EXPORT_DIRECTORY || './exports',
