@@ -15,6 +15,8 @@ import HelpPage from './pages/customer/HelpPage';
 
 // Backoffice pages
 import LoginPage from './pages/backoffice/LoginPage';
+import ForgotPasswordPage from './pages/backoffice/ForgotPasswordPage';
+import ResetPasswordPage from './pages/backoffice/ResetPasswordPage';
 import DashboardPage from './pages/backoffice/DashboardPage';
 import DownloadsPage from './pages/backoffice/DownloadsPage';
 import ChangePasswordPage from './pages/backoffice/ChangePasswordPage';
@@ -43,6 +45,8 @@ function App() {
 
       {/* Backoffice routes */}
       <Route path="/backoffice/login" element={<LoginPage />} />
+      <Route path="/backoffice/forgot-password" element={<ForgotPasswordPage />} />
+      <Route path="/backoffice/reset-password" element={<ResetPasswordPage />} />
       <Route
         path="/backoffice/dashboard"
         element={

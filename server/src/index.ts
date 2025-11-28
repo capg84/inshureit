@@ -11,6 +11,7 @@ import quoteRoutes from './routes/quote.routes';
 import downloadRoutes from './routes/download.routes';
 import userRoutes from './routes/user.routes';
 import contactRoutes from './routes/contact.routes';
+import passwordResetRoutes from './routes/passwordReset.routes';
 
 const app = express();
 
@@ -54,6 +55,7 @@ app.use('/api/quotes', quoteRoutes);
 app.use('/api/downloads', downloadRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/contact', contactRoutes);
+app.use('/api/password-reset', passwordResetRoutes);
 
 // 404 handler
 app.use(notFoundHandler);

@@ -103,6 +103,18 @@ class AuthService {
     const user = this.getCurrentUser();
     return user?.userType === 'ADMIN';
   }
+
+  async requestPasswordReset(email: string): Promise<ApiResponse<{ message: string }>> {
+    return api.post<ApiResponse<{ message: string }>>('/password-reset/request', { email });
+  }
+
+  async verifyResetToken(token: string): Promise<ApiResponse<{ valid: boolean; email: string }>> {
+    return api.get<ApiResponse<{ valid: boolean; email: string }>>(`/password-reset/verify/${token}`);
+  }
+
+  async resetPassword(token: string, newPassword: string): Promise<ApiResponse<{ message: string }>> {
+    return api.post<ApiResponse<{ message: string }>>('/password-reset/reset', { token, newPassword });
+  }
 }
 
 export const authService = new AuthService();

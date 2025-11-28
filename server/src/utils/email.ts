@@ -13,6 +13,13 @@ interface QuoteEmailData {
   partnerLastName?: string;
 }
 
+interface PasswordResetEmailData {
+  email: string;
+  firstName: string;
+  resetToken: string;
+  resetUrl: string;
+}
+
 class EmailService {
   private transporter: nodemailer.Transporter | null = null;
 
@@ -61,6 +68,32 @@ class EmailService {
       return true;
     } catch (error) {
       console.error('Error sending quote confirmation email:', error);
+      return false;
+    }
+  }
+
+  async sendPasswordResetEmail(data: PasswordResetEmailData): Promise<boolean> {
+    if (!this.transporter) {
+      console.warn('Email transporter not configured. Skipping email send.');
+      return false;
+    }
+
+    try {
+      const emailHtml = this.generatePasswordResetEmail(data);
+      const emailText = this.generatePasswordResetText(data);
+
+      await this.transporter.sendMail({
+        from: process.env.SMTP_FROM || '"InshureIt" <info@inshureit.com>',
+        to: data.email,
+        subject: 'Password Reset Request - InshureIt',
+        text: emailText,
+        html: emailHtml,
+      });
+
+      console.log(`Password reset email sent to ${data.email}`);
+      return true;
+    } catch (error) {
+      console.error('Error sending password reset email:', error);
       return false;
     }
   }
@@ -179,6 +212,75 @@ If you have any questions or need to update your information, please don't hesit
 
 ---
 This is an automated confirmation email from InshureIt. Please do not reply to this email.
+    `.trim();
+  }
+
+  private generatePasswordResetEmail(data: PasswordResetEmailData): string {
+    return `
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Password Reset</title>
+      </head>
+      <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
+        <div style="background-color: #f8f9fa; border-radius: 8px; padding: 30px;">
+          <h1 style="color: #2563eb; margin-bottom: 20px;">Password Reset Request</h1>
+
+          <p style="font-size: 16px; margin-bottom: 20px;">
+            Hello ${data.firstName},
+          </p>
+
+          <p style="font-size: 16px; margin-bottom: 20px;">
+            We received a request to reset your password for your InshureIt backoffice account. Click the button below to reset your password:
+          </p>
+
+          <div style="text-align: center; margin: 30px 0;">
+            <a href="${data.resetUrl}" style="display: inline-block; background-color: #2563eb; color: white; padding: 14px 32px; text-decoration: none; border-radius: 6px; font-size: 16px; font-weight: bold;">Reset Password</a>
+          </div>
+
+          <p style="font-size: 14px; color: #6b7280; margin-bottom: 20px;">
+            Or copy and paste this link into your browser:<br>
+            <a href="${data.resetUrl}" style="color: #2563eb; word-break: break-all;">${data.resetUrl}</a>
+          </p>
+
+          <div style="background-color: #fef3c7; border-left: 4px solid #f59e0b; padding: 15px; margin: 20px 0;">
+            <p style="margin: 0; font-size: 14px;">
+              <strong>Security Notice:</strong><br>
+              This password reset link will expire in 1 hour. If you didn't request this password reset, you can safely ignore this email. Your password will remain unchanged.
+            </p>
+          </div>
+
+          <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 30px 0;">
+
+          <p style="font-size: 12px; color: #9ca3af; margin: 0;">
+            This is an automated email from InshureIt. Please do not reply to this email.<br>
+            If you need assistance, please contact your system administrator.
+          </p>
+        </div>
+      </body>
+      </html>
+    `;
+  }
+
+  private generatePasswordResetText(data: PasswordResetEmailData): string {
+    return `
+Password Reset Request
+
+Hello ${data.firstName},
+
+We received a request to reset your password for your InshureIt backoffice account.
+
+To reset your password, click the link below or copy and paste it into your browser:
+${data.resetUrl}
+
+SECURITY NOTICE:
+This password reset link will expire in 1 hour. If you didn't request this password reset, you can safely ignore this email. Your password will remain unchanged.
+
+---
+This is an automated email from InshureIt. Please do not reply to this email.
+If you need assistance, please contact your system administrator.
     `.trim();
   }
 }
