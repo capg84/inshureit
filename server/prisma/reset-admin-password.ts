@@ -7,7 +7,7 @@ async function main() {
   console.log('Resetting admin password...');
 
   const adminEmail = 'admin@inshureit.com';
-  const newPassword = 'Admin@123';
+  const newPassword = 'zifpuw-wyvpin-4toWqi';
 
   const hashedPassword = await bcrypt.hash(newPassword, 12);
 
